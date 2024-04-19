@@ -1,0 +1,92 @@
+(rlds_env) moojink@iris-ws-11:/iris/u/moojink/rlds_dataset_builder/ppgm_rlds_dataset_builder/PPGM$ tfds build --overwrite                                                                                                                                     
+INFO[build.py]: Loading dataset  from path: /iris/u/moojink/rlds_dataset_builder/ppgm_rlds_dataset_builder/PPGM/PPGM_dataset_builder.py                                                                                                                       
+2024-01-18 04:29:15.313359: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.                                                                                                                       
+2024-01-18 04:29:15.339891: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.                                                                                                                       
+2024-01-18 04:29:15.340172: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.                                                                    
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.                                                                                                                                  
+2024-01-18 04:29:15.763487: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT                                                                                                                                   
+2024-01-18 04:29:15.943701: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://
+github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355                                                                                                                                                                         
+2024-01-18 04:29:15.958977: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1960] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https:/
+/www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.                                                                                                                                                       
+Skipping registering GPU devices...                                                                                                                                                                                                                           
+2024-01-18 04:29:16.328546: W tensorflow/tsl/platform/cloud/google_auth_provider.cc:184] All attempts to get a Google authentication bearer token failed, returning an empty token. Retrieving token from files failed with "NOT_FOUND: Could not locate the c
+redentials file.". Retrieving token from GCE failed with "FAILED_PRECONDITION: Error executing an HTTP request: libcurl code 6 meaning 'Couldn't resolve host name', error details: Could not resolve host: metadata.google.internal".                        
+INFO[build.py]: download_and_prepare for dataset ppgm/1.0.0...                                                                                                                                                                                                
+INFO[native_type_compatibility.py]: Using Any for unsupported type: typing.Sequence[~T]                                                                                                                                                                       
+INFO[bigquery.py]: No module named google.cloud.bigquery_storage_v1. As a result, the ReadFromBigQuery transform *CANNOT* be used with `method=DIRECT_READ`.                                                                                                  
+INFO[dataset_builder.py]: Generating dataset ppgm (/iris/u/moojink/tensorflow_datasets/ppgm/1.0.0)                                                                                                                                                            
+Downloading and preparing dataset Unknown size (download: Unknown size, generated: Unknown size, total: Unknown size) to /iris/u/moojink/tensorflow_datasets/ppgm/1.0.0...                                                                                    
+Generating splits...:   0%|                                                                                                                                                                                                        | 0/1 [00:00<?, ? splits/s]
+Found 7327 episodes.mples...: 0 examples [00:00, ? examples/s]                                                                                                                                                                                                
+                                                                                                                                                                                                                                                              
+INFO[writer.py]: Done writing /iris/u/moojink/tensorflow_datasets/ppgm/1.0.0.incomplete00IJUX/ppgm-train.tfrecord*. Number of examples: 7326 (shards: [7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7
+, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 
+8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7,
+ 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8
+, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 
+7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7,
+ 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7
+, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 
+7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7,
+ 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7
+, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 
+7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7,
+ 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 8, 7, 7, 7])                                                                               
+Dataset ppgm downloaded and prepared to /iris/u/moojink/tensorflow_datasets/ppgm/1.0.0. Subsequent calls will reuse this data.
+INFO[build.py]: Dataset generation complete...
+
+tfds.core.DatasetInfo(
+    name='ppgm',
+    full_name='ppgm/1.0.0',
+    description="""
+    TODO(example_dataset): Markdown description of your dataset.                                                                                                                                                                                       [0/263]
+    Description is **formatted** as markdown.
+
+    It should also contain any processing which has been applied (if any),
+    (e.g. corrupted example skipped, images cropped,...):
+    """,
+    homepage='https://www.tensorflow.org/datasets/catalog/ppgm',
+    data_path='/iris/u/moojink/tensorflow_datasets/ppgm/1.0.0',
+    file_format=tfrecord,
+    download_size=Unknown size,
+    dataset_size=72.73 GiB,
+    features=FeaturesDict({
+        'episode_metadata': FeaturesDict({
+            'file_path': Text(shape=(), dtype=string),
+            'recording_folderpath': Text(shape=(), dtype=string),
+        }),
+        'steps': Dataset({
+            'action': Tensor(shape=(7,), dtype=float32),
+            'action_dict': FeaturesDict({
+                'cartesian_position': Tensor(shape=(6,), dtype=float32),
+                'cartesian_velocity': Tensor(shape=(6,), dtype=float32),
+                'gripper_position': Tensor(shape=(1,), dtype=float32),
+                'gripper_velocity': Tensor(shape=(1,), dtype=float32),
+                'joint_position': Tensor(shape=(7,), dtype=float32),
+                'joint_velocity': Tensor(shape=(7,), dtype=float32),
+            }),
+            'discount': Scalar(shape=(), dtype=float32),
+            'is_first': Scalar(shape=(), dtype=bool),
+            'is_last': Scalar(shape=(), dtype=bool),
+            'is_terminal': Scalar(shape=(), dtype=bool),
+            'language_instruction': Text(shape=(), dtype=string),
+            'observation': FeaturesDict({
+                'cartesian_position': Tensor(shape=(6,), dtype=float32),
+                'gripper_position': Tensor(shape=(1,), dtype=float32),
+                'joint_position': Tensor(shape=(7,), dtype=float32),
+                'static_depth_image': Image(shape=(270, 360, 1), dtype=uint8),
+                'static_image': Image(shape=(270, 360, 3), dtype=uint8),
+                'wrist_depth_image': Image(shape=(270, 360, 1), dtype=uint8),
+                'wrist_image': Image(shape=(270, 360, 3), dtype=uint8),
+            }),
+            'reward': Scalar(shape=(), dtype=float32),
+        }),
+    }),
+    supervised_keys=None,
+    disable_shuffling=False,
+    splits={
+        'train': <SplitInfo num_examples=7326, num_shards=1024>,
+    },
+    citation="""// TODO(ppgm): BibTeX citation""",
+)

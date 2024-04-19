@@ -245,28 +245,40 @@ class TrajectoryReader:
         self._hdf5_file.close()
 
 
-def crawler(dirname, filter_func=None):
-    subfolders = [f.path for f in os.scandir(dirname) if f.is_dir()]
-    traj_files = [f.path for f in os.scandir(dirname) if (f.is_file() and "trajectory.h5" in f.path)]
-
-    if len(traj_files):
-        # Only Save Desired Data #
-        if filter_func is None:
-            use_data = True
-        else:
-            hdf5_file = h5py.File(traj_files[0], "r")
-            use_data = filter_func(hdf5_file.attrs)
-            hdf5_file.close()
-
-        if use_data:
-            return [dirname]
-
+def crawler(data_dirs, filter_func=None):
+    dirs = data_dirs.split(',')
     all_folderpaths = []
-    for child_dirname in subfolders:
-        child_paths = crawler(child_dirname, filter_func=filter_func)
-        all_folderpaths.extend(child_paths)
-
+    for d in dirs:
+        if d == '':
+            continue
+        assert os.path.isdir(d), f"Not a directory: {d}"
+        folderpaths = os.path.join(d, 'success', '**', '**')
+        all_folderpaths += glob.glob(folderpaths)
+    all_folderpaths.sort()
+    print(f"\nFound {len(all_folderpaths)} episodes.\n")
     return all_folderpaths
+
+    # subfolders = [f.path for f in os.scandir(dirname) if f.is_dir()]
+    # traj_files = [f.path for f in os.scandir(dirname) if (f.is_file() and "trajectory.h5" in f.path)]
+
+    # if len(traj_files):
+    #     # Only Save Desired Data #
+    #     if filter_func is None:
+    #         use_data = True
+    #     else:
+    #         hdf5_file = h5py.File(traj_files[0], "r")
+    #         use_data = filter_func(hdf5_file.attrs)
+    #         hdf5_file.close()
+
+    #     if use_data:
+    #         return [dirname]
+
+    # all_folderpaths = []
+    # for child_dirname in subfolders:
+    #     child_paths = crawler(child_dirname, filter_func=filter_func)
+    #     all_folderpaths.extend(child_paths)
+
+    # return all_folderpaths
 
 
 def load_trajectory(
@@ -482,13 +494,54 @@ class PPGM(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: tfds.download.DownloadManager):
         """Define data splits."""
+
+        data_dirs = \
+                '/iris/u/moojink/upgm/R2D2/data_1_2023-04-26_128-demos-5-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_2_2023-05-02_50-demos-red-cube-fixed-robot-pose,'\
+                '/iris/u/moojink/upgm/R2D2/data_3_2023-05-02_50-demos-blue-and-white-milk-carton-fixed-robot-pose,'\
+                '/iris/u/moojink/upgm/R2D2/data_4_2023-05-03_56-demos-2-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_5_2023-05-10_76-demos-3-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_6_2023-05-14_136-demos-5-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_7_2023-05-15_152-demos-5-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_8_2023-05-17_243-demos-9-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_9_2023-05-24_328-demos-11-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_10_2023-05-31_275-demos-10-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_11_2023-06-07_287-demos-11-objects,'\
+                '/iris/u/moojink/upgm/R2D2/data_12_2023-07-17_50-demos-2-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_13_2023-07-19_77-demos-3-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_14_2023-07-24_177-demos-7-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_15_2023-07-26_75-demos-3-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_16_2023-08-01_50-demos-2-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_17a_2023-08-02_76-demos-3-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_17b_2023-08-02_25-demos-1-object,' \
+                '/iris/u/moojink/upgm/R2D2/data_18_2023-08-07_326-demos-12-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_19a_2023-08-08_189-demos-7-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_19b_2023-08-08_83-demos-3-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_20_2023-08-09_189-demos-7-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_21_2023-08-15_271-demos-10-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_22_2023-08-31_45-demos-2-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_23_2023-09-05_60-demos-2-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_24_2023-10-20_163-demos-6-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_25_2023-10-25_308-demos-11-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_26_2023-10-26_330-demos-11-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_27_2023-10-27_317-demos-12-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_28_2023-11-01_349-demos-8-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_29_2023-11-08_305-demos-8-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_30_2023-11-09_244-demos-9-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_31_2023-11-10_193-demos-8-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_32_2023-11-15_247-demos-9-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_33_2023-11-17_357-demos-11-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_34_2023-11-29_183-demos-6-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_35_2023-11-30_221-demos-7-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_36_2023-12-01_234-demos-7-objects,' \
+                '/iris/u/moojink/upgm/R2D2/data_37_2023-12-06_403-demos-6-objects,'
         return {
-            'train': self._generate_examples(path='/scr/moojink/data/R2D2/data_debug_2023-11-01_47-demos/', wrist_cam_id=138422074005, static_cam_id=140122076178), # TODO remove hardcode
+            'train': self._generate_examples(data_dirs=data_dirs, wrist_cam_id=138422074005, static_cam_id=140122076178),
             #'val': self._generate_examples(''),
         }
 
 
-    def _generate_examples(self, path, wrist_cam_id, static_cam_id) -> Iterator[Tuple[str, Any]]:
+    def _generate_examples(self, data_dirs, wrist_cam_id, static_cam_id) -> Iterator[Tuple[str, Any]]:
         """Generator of examples for each split."""
 
         def _resize_and_encode(image, size):
@@ -566,19 +619,19 @@ class PPGM(tfds.core.GeneratorBasedBuilder):
             return episode_path, sample
 
         # create list of all examples
-        episode_paths = crawler(path)
+        episode_paths = crawler(data_dirs)
         episode_paths = [p for p in episode_paths if os.path.exists(p + '/trajectory.h5') and \
                 os.path.exists(p + '/recordings/MP4')]
 
-        # # for smallish datasets, use single-thread parsing
-        # for sample in episode_paths:
-        #     yield _parse_example(sample)
+        # for smallish datasets, use single-thread parsing
+        for sample in episode_paths:
+            yield _parse_example(sample)
 
-        # for large datasets use beam to parallelize data parsing (this will have initialization overhead)
-        beam = tfds.core.lazy_imports.apache_beam
-        return (
-                beam.Create(episode_paths)
-                | beam.Map(_parse_example)
-        )
+        # # for large datasets use beam to parallelize data parsing (this will have initialization overhead)
+        # beam = tfds.core.lazy_imports.apache_beam
+        # return (
+        #         beam.Create(episode_paths)
+        #         | beam.Map(_parse_example)
+        # )
 
 
